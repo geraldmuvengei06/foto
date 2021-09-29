@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Search from './pages/Search';
+import Random from './pages/Random';
+import ViewImage from './pages/ViewImage';
+import Header from './components/Header';
+import { Container } from 'react-bootstrap';
+import notfoundimg from './notfoundimg.png';
+// import { Nav, Navbar, NavDropdown, Container, FormControl, Button, Form } from 'react-bootstrap'
 
-function App() {
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <Header />
+          <Routes className="content">
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/search/:search" element={<Search />}></Route>
+            <Route path="/random" element={<Random />}></Route>
+            <Route path="/foto/:id" element={ <ViewImage /> }></Route>
+            <Route path="*" element={<NotFound />}></Route>
+
+          </Routes>
+        </Router>
+      </div>
+    )
+  }
+}
+
+let NotFound = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Container>
+      <div class="text-center">
+        <img className="img-fluid" src={notfoundimg} style={{'max-height': '300px'}} />
+      </div>
+    </Container>
+  )
 }
 
 export default App;
