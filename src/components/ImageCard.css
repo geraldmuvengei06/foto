@@ -49,10 +49,10 @@ figure a {
   text-decoration: none;
 }
 
-figcaption {
+/* figcaption {
   grid-row: 2;
   grid-column: 1;
   padding: .2em .5em;
   justify-self: start;
 }
-
+ */

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import './ViewImage.css'
 
 import api from "../api";
-import ImageCard from "../components/ImageCard";
+// import ImageCard from "../components/ImageCard";
 let ViewImage = () => {
     let { id } = useParams()
     let [data, setPhotoResponse] = useState(null)
@@ -48,7 +48,7 @@ let ViewImage = () => {
                                 </div>
                                 <div className="flex-grow-1 ms-3">
                                     <strong>{data.response.user.username}</strong>
-                                    <p><a target="_blank" href={data.response.user.links.html}>@{data.response.user.username}</a> </p>
+                                    <p><a  href={data.response.user.links.html}>@{data.response.user.username}</a> </p>
                                 </div>
                             </div>
                                     <p className="btn-group">

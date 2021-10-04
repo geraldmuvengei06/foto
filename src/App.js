@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import List from './pages/List';
 import Search from './pages/Search';
 import Random from './pages/Random';
 import ViewImage from './pages/ViewImage';
@@ -17,7 +17,7 @@ class App extends Component {
         <Router>
           <Header />
           <Routes className="content">
-            <Route path="/" element={<Home />}></Route>
+            <Route path="/" element={<List />}></Route>
             <Route path="/search/:search" element={<Search />}></Route>
             <Route path="/random" element={<Random />}></Route>
             <Route path="/foto/:id" element={ <ViewImage /> }></Route>
@@ -34,7 +34,7 @@ let NotFound = () => {
   return (
     <Container>
       <div class="text-center">
-        <img className="img-fluid" src={notfoundimg} style={{'max-height': '300px'}} />
+        <img className="img-fluid" src={notfoundimg} alt="page not found" style={{'max-height': '300px'}} />
       </div>
     </Container>
   )

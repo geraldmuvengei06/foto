@@ -3,7 +3,7 @@ import './Home.css';
 
 import ImageCard from '../components/ImageCard'
 // const ImageCard = React.lazy(() => import("../components/ImageCard"))
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchField from '../components/SearchField';
 
 import api from '../api'
@@ -37,49 +37,38 @@ let Hero = () => {
     )
 }
 
+class HomeContent extends React.Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            photos: [],
+            page: 1
+        }
+        this.loadMore = this.loadMore.bind(this)
+    }
 
-let HomeContent = () => {
-    const [data, setPhotosResponse] = useState(null);
-    let [page, setPage] = useState(null);
-
-    let listPhotos = () => {
-        api.photos.list({ perPage: 10   , page: page })
+    loadMore() {
+        let newpage = this.state.page
+        newpage++
+        this.setState({page: newpage});
+        console.log("current page", this.state.page);
+        api.photos.list({ perPage: 10, page: this.state.page })
             .then(res => {
                 console.log('res', res);
-                setPhotosResponse(res)
+                let morePhotos = [...this.state.photos, ...res.response.results]
+                this.setState((state) => ({
+                    photos: morePhotos
+                }))
             })
             .catch(err => console.log('err', err))
     }
-    let loadMore = () => {
-        ++page
-        setPage(page)
-        console.log(page);
-        api.photos.list({ perPage: 10, page: page })
-            .then(res => {
-                console.log('res', res);
-                let morePhotos = [...data.response.results, ...res.response.results]
-                console.log(morePhotos.length);
-                data.response.results = morePhotos
-                setPhotosResponse(data)
-            })
-            .catch(err => console.log('err', err))
-    }
-    useEffect(() => {
-        setPage(1)
-        listPhotos()
-    }, [])
 
-    if (data === null) {
-        return <div>Loading...</div>
-    } else if (data.errors) {
-        return (
-            <div>
-                <div>{data.errors[0]}</div>
-                <div>PS: Make sure to set your access token!</div>
-            </div>
-        );
-    }else{
-        const imageList = data.response.results.map((item, index) => <ImageCard key={index} item={item} />)
+    componentDidMount() {
+        this.loadMore()
+    }
+
+    render() {
+        const imageList = this.state.photos.map((item, index) => <ImageCard className="" key={index} item={item} />)
 
         return (
             <Container className="my-4">
@@ -88,11 +77,12 @@ let HomeContent = () => {
                     {imageList}
                 </div>
                 <div className="text-center ms-3">
-                    <Button variant="primary" onClick={loadMore}>Load more..</Button>
+                    <Button variant="primary" onClick={this.loadMore}>Load more..</Button>
                 </div>
             </Container>
         )
     }
 }
+
 
 export default Home
