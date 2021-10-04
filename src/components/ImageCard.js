@@ -19,7 +19,7 @@ let ImageCard = (props) => {
 						<img className="rounded" src={user.profile_image.small || ''} alt={user.username} />
 					</div>
 					<div className="flex-grow-1 ms-3">
-						<a className="fontweight-bold text-black" rel="nonreferrer" target="_blank" href={user.portfolio_url}>{user.username}</a>
+						<a className="fontweight-bold text-black"  href={user.portfolio_url}>{user.username}</a>
 					</div>
 				</div>
 

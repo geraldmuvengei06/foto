@@ -18,6 +18,7 @@ let ViewImage = () => {
     }
     useEffect(() => {
         getPhoto()
+        // eslint-disable-next-line
     }, [])
     if (data === null) {
         return <div>Loading...</div>
@@ -38,7 +39,7 @@ let ViewImage = () => {
                     <Row className="justify-content-center">
                         <Col xs sm="8" className="align-self-center">
                             <div className="text-center">
-                                <img className="img-fluid" src={data.response.urls.regular} />
+                                <img className="img-fluid" alt={data.response.urls.regular} src={data.response.urls.regular} />
                             </div>
                         </Col>
                         <Col className="">
@@ -48,12 +49,12 @@ let ViewImage = () => {
                                 </div>
                                 <div className="flex-grow-1 ms-3">
                                     <strong>{data.response.user.username}</strong>
-                                    <p><a  href={data.response.user.links.html}>@{data.response.user.username}</a> </p>
+                                    <p><a href={data.response.user.links.html}>@{data.response.user.username}</a> </p>
                                 </div>
                             </div>
-                                    <p className="btn-group">
-                                        <Button variant="primary">Download</Button>
-                                    </p>
+                            <p className="btn-group">
+                                <Button variant="primary">Download</Button>
+                            </p>
                         </Col>
                     </Row>
                 </Container>

@@ -67,7 +67,8 @@ let HomeContent = () => {
     useEffect(() => {
         setPage(1)
         listPhotos()
-    }, [])
+        // eslint-disable-next-line
+    },[])
 
     if (data === null) {
         return <div>Loading...</div>

@@ -41,6 +41,15 @@
     min-height: 440px;
   }
   .masonry-grid{
+    column-count: 2;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .App-header{
+    min-height: 540px;
+  }
+  .masonry-grid{
     column-count: 1;
   }
 }
